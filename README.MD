@@ -33,12 +33,23 @@ The MCU is an Atmega328P. Output from TCS3200 is connected to external interrupt
 
 ## Operation
 
-Upon initialization, S2 and S3 pins are low, thus red photodiodes are active. The 16 bit timer 1 on MCU is configured to generate a interrupt request at every 3332 \mus.
+Indide the INO ISR, the number of pulses is accumulated in a variable.
+
  <pre>
  ISR(INT0_vect) {
-    ...
+    pulse_count++;
  }
  </pre>
+
+Upon initialization, S2 and S3 pins are low, thus red photodiodes are active. The 16 bit timer 1 on MCU is configured to generate a interrupt request at every 3332 &mu;s. Inside this timer interrupt service routine, S2 and S3 pins are toggled to select a different group of photodioes. Before toggling, pulse counts accumulated inside INT0 ISR are read out and set to zero.
+
+A finite state machine controls the channel switching,
+
+<pre>
+ISR(TIMER1_COMPA_vect) {
+    fsm();
+}
+</pre>
 
 ## Configuration
 
