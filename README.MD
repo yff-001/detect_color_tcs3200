@@ -4,12 +4,7 @@ Table of Contents
 - [Theory](#theory)
 - [Circuit](#circuit)
 - [Project Structure](#project-structure)
-- [Configuration](#configuration)
-- [Usage](#usage)
-- [Customization](#customization)
-- [Resources](#resources)
-- [Contributing](#contributing)
-- [License](#license)
+- [Conclusion](#conclusion)
 
 ---
 
@@ -41,9 +36,9 @@ Indide the INO ISR, the number of pulses is accumulated in a variable.
  }
  </pre>
 
-Upon initialization, S2 and S3 pins are low, thus red photodiodes are active. The 16 bit timer 1 on MCU is configured to generate a interrupt request at every 3332 &mu;s. Inside this timer interrupt service routine, S2 and S3 pins are toggled to select a different group of photodioes. Before toggling, pulse counts accumulated inside INT0 ISR are read out and set to zero.
+Upon initialization, S2 and S3 pins are low, thus red photodiodes are active. The 16 bit timer 1 on MCU is configured to generate a interrupt request at every 3332 &mu;s. Inside this timer interrupt service routine, S2 and S3 pins are toggled to select a different group of photodioes. Before toggling, pulse counts accumulated inside INT0 ISR are read out and set to zero. With proper distance between sensor and light source and output level set, the value of varialbe pulse_count will fall within the range of {0, 255}. 
 
-A finite state machine controls the channel switching,
+A finite state machine controls the channel switching, 
 
 <pre>
 ISR(TIMER1_COMPA_vect) {
@@ -51,6 +46,10 @@ ISR(TIMER1_COMPA_vect) {
 }
 </pre>
 
-## Configuration
+Since variable pulse_cont is read out every 3332&mu;s, the sampling fequency is 300.12 Hz. And since red, green, blue channels are sampled in turn. The sampling frequency for all three channels is 100.04 Hz. This is fast enough to capture rapid transition is color change. For example, it is suitable for detecting the blinking sequence of a RGB led.
 
-List any configuration files or settings that need to be modified for specific projects. Mention how to modify these files for customization.
+The integer values for three color channels are used to calculate the Euclidean distance in RGB color space.
+
+## Conclusion
+
+The algorithm is robust and efficient enough to be implemented on MCU like Atmega328P running at 16MHz.
