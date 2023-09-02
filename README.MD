@@ -17,7 +17,7 @@ Table of Contents
 
 Color difference is the seperation between two colors. Common definitions of color difference are distance within a color space. The starndard means of determining distance is Euclidean distance.
 
-$distance=\sqrt((R2-R1)^2+(G2-G1)^2+(B2-B1)^2)$
+$distance=\sqrt{(R2-R1)^2+(G2-G1)^2+(B2-B1)^2}$
 
 ![Alt Text](./image/color_space.png)
 
