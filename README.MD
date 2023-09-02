@@ -1,8 +1,8 @@
 # Detect Color Difference with TCS3200
 
 Table of Contents
-- [Project Overview](#project-overview)
-- [Getting Started](#getting-started)
+- [Theory](#thoery)
+- [Circuit](#circuit)
 - [Project Structure](#project-structure)
 - [Configuration](#configuration)
 - [Usage](#usage)
@@ -13,7 +13,7 @@ Table of Contents
 
 ---
 
-## Project Overview
+## Theory
 
 Color difference is the seperation between two colors. Common definitions of color difference are distance within a color space. The starndard means of determining distance is Euclidean distance.
 
