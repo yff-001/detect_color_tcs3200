@@ -30,7 +30,9 @@ The MCU is an Atmega328P. Output from TCS3200 is connected to external interrupt
 
 Upon initialization, S2 and S3 pins are low, thus red photodiodes are active. The 16 bit timer 1 on MCU is configured to generate a interrupt request at every 3332 &mu;s. 
 
-Inside this timer interrupt service routine, S2 and S3 pins are toggled to select a different group of photodioes. Before toggling, pulse counts accumulated inside INT0 ISR are read out and set to zero. Since variable pulse_count is read out every 3332&mu;s, the sampling fequency is 300.12 Hz. And since red, green, blue channels are sampled in turn, the sampling frequency for all three channels is 100.04 Hz. This is fast enough to capture rapid transition is color change. For example, it is suitable for detecting the blinking sequence of a RGB led.
+Inside this timer interrupt service routine, S2 and S3 pins are toggled to select a different group of photodioes. Before toggling, pulse counts accumulated inside INT0 ISR are read out and set to zero. Since variable pulse_count is read out every 3332&mu;s, the sampling fequency is 300.12 Hz. And since red, green, blue channels are sampled in turn, the sampling frequency for all three channels is 100.04 Hz. This is fast enough to capture rapid transition in color. For example, it is suitable for detecting the blinking sequence of a RGB led.
+
+A finite state machine controls the channel switching.
 
 <pre>
 ISR(TIMER1_COMPA_vect) {
@@ -45,8 +47,6 @@ Inside the INT0 ISR, the number of pulses is accumulated.
     pulse_count++;
  }
  </pre>
-
-A finite state machine controls the channel switching, 
 
 With proper distance between sensor and light source and output level set, the value of variable pulse_count will fall within the range of {0, 255}. The integer values for three color channels are used to calculate the Euclidean distance in RGB color space.
 
