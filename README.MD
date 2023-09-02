@@ -1,4 +1,4 @@
-# Project Template Readme
+# Detect Color Difference with TCS3200
 
 Table of Contents
 - [Project Overview](#project-overview)
