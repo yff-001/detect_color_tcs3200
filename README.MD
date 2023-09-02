@@ -16,48 +16,31 @@ Table of Contents
 ## Theory
 
 Color difference is the seperation between two colors. Common definitions of color difference are distance within a color space. The starndard means of determining distance is Euclidean distance.
-\begin{center}
-\[
+
 $distance=\sqrt{(R2-R1)^2+(G2-G1)^2+(B2-B1)^2}$
-\]
-\end{center}
 
 ![Alt Text](./image/color_space.png)
 
 ## Circuit
 
-Explain the necessary steps to get started with the project. Include any dependencies or tools required for development.
+The color sensor TCS3200 is used to sample color information. The output is a square wave with frequency directly proportional to light intensity.
+
+There four types of photodiodes on the chip: red, green, blue, and clear. S2 and S3 pins are used to select which group of photodiodes are active.
+
+The MCU is an Atmega328P. Output from TCS3200 is connected to external interrupt pin (PB0) on MCU. The pin is configured to generate a interrupt request on rising edge of input signal.
 
 ![Alt Text](./image/tcs3200.svg)
 
-## Project Structure
+## Operation
 
-Describe the structure of the project directory and highlight the key files and folders. 
+ <pre>
+ '''
+ ISR(INT0_vect) {
+    ...
+ }
+ '''
+ </pre>
 
 ## Configuration
 
 List any configuration files or settings that need to be modified for specific projects. Mention how to modify these files for customization.
-
-## Usage
-
-Explain how to use the project template effectively. Provide guidelines, best practices, and any conventions to follow.
-
-## Customization
-
-Detail the sections or files that can be modified in future projects. Encourage developers to tailor the template to fit their specific needs.
-
-## Resources
-
-If there are any external resources or references relevant to the project, provide links or documentation references here.
-
-## Contributing
-
-Specify guidelines for contributing to the project or encourage users to submit improvements and suggestions.
-
-## License
-
-State the license information for the project.
-
----
-
-Feel free to modify this .md file as needed to adapt it to your specific project requirements. Remember to update the sections and content accordingly whenever necessary.

@@ -54,6 +54,9 @@ void init_system() {
     DDRB |= (1 << PB2) | (1 << PB3) | (1 << PB4) | (1 << PB5);
     PORTB |= (1 << PB4) | (1 << PB5);                                       // set output frequency at 100%
 
+    EICRA |= (1 << ISC01) | (1 << ISC00);                                   // rising edge on INT0 generates an interrupt request
+    EIMSK |= (1 << INT0);                                                   // enable INT0
+
     sei();
 }
 
