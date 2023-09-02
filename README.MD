@@ -20,7 +20,7 @@ $distance=\sqrt{(R2-R1)^2+(G2-G1)^2+(B2-B1)^2}$
 
 The color sensor TCS3200 is used to sample color information. The output is a square wave with frequency directly proportional to light intensity.
 
-There four types of photodiodes on the chip: red, green, blue, and clear. S2 and S3 pins are used to select which group of photodiodes are active.
+There are four types of photodiodes on the chip: red, green, blue, and clear. S2 and S3 pins are used to select which group of photodiodes are active.
 
 The MCU is an Atmega328P. Output from TCS3200 is connected to external interrupt pin (PB0) on MCU. The pin is configured to generate a interrupt request on rising edge of input signal.
 
@@ -28,17 +28,9 @@ The MCU is an Atmega328P. Output from TCS3200 is connected to external interrupt
 
 ## Operation
 
-Indide the INT0 ISR, the number of pulses is accumulated in a variable.
+Upon initialization, S2 and S3 pins are low, thus red photodiodes are active. The 16 bit timer 1 on MCU is configured to generate a interrupt request at every 3332 &mu;s. 
 
- <pre>
- ISR(INT0_vect) {
-    pulse_count++;
- }
- </pre>
-
-Upon initialization, S2 and S3 pins are low, thus red photodiodes are active. The 16 bit timer 1 on MCU is configured to generate a interrupt request at every 3332 &mu;s. Inside this timer interrupt service routine, S2 and S3 pins are toggled to select a different group of photodioes. Before toggling, pulse counts accumulated inside INT0 ISR are read out and set to zero. With proper distance between sensor and light source and output level set, the value of variable pulse_count will fall within the range of {0, 255}. 
-
-A finite state machine controls the channel switching, 
+Inside this timer interrupt service routine, S2 and S3 pins are toggled to select a different group of photodioes. Before toggling, pulse counts accumulated inside INT0 ISR are read out and set to zero. Since variable pulse_count is read out every 3332&mu;s, the sampling fequency is 300.12 Hz. And since red, green, blue channels are sampled in turn, the sampling frequency for all three channels is 100.04 Hz. This is fast enough to capture rapid transition is color change. For example, it is suitable for detecting the blinking sequence of a RGB led.
 
 <pre>
 ISR(TIMER1_COMPA_vect) {
@@ -46,9 +38,17 @@ ISR(TIMER1_COMPA_vect) {
 }
 </pre>
 
-Since variable pulse_count is read out every 3332&mu;s, the sampling fequency is 300.12 Hz. And since red, green, blue channels are sampled in turn, the sampling frequency for all three channels is 100.04 Hz. This is fast enough to capture rapid transition is color change. For example, it is suitable for detecting the blinking sequence of a RGB led.
+Inside the INT0 ISR, the number of pulses is accumulated.
 
-The integer values for three color channels are used to calculate the Euclidean distance in RGB color space.
+ <pre>
+ ISR(INT0_vect) {
+    pulse_count++;
+ }
+ </pre>
+
+A finite state machine controls the channel switching, 
+
+With proper distance between sensor and light source and output level set, the value of variable pulse_count will fall within the range of {0, 255}. The integer values for three color channels are used to calculate the Euclidean distance in RGB color space.
 
 ## Conclusion
 
