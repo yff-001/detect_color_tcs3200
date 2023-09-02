@@ -3,7 +3,7 @@
 Table of Contents
 - [Theory](#theory)
 - [Circuit](#circuit)
-- [Project Structure](#project-structure)
+- [Operation](#operation)
 - [Conclusion](#conclusion)
 
 ---
