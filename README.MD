@@ -33,12 +33,11 @@ The MCU is an Atmega328P. Output from TCS3200 is connected to external interrupt
 
 ## Operation
 
+Upon initialization, S2 and S3 pins are low, thus red photodiodes are active. The 16 bit timer 1 on MCU is configured to generate a interrupt request at every 3332 \mus.
  <pre>
- '''
  ISR(INT0_vect) {
     ...
  }
- '''
  </pre>
 
 ## Configuration
