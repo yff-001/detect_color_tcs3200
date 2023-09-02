@@ -13,17 +13,17 @@ Table of Contents
 
 ---
 
-This project serves as a template for future AVR MCU projects. It contains a pre-configured setup and a modular structure to facilitate easy development and modification.
-
 ## Project Overview
 
 Color difference is the seperation between two colors. Common definitions of color difference are distance within a color space. The starndard means of determining distance is Euclidean distance.
 
-![Alt Text](./image/tcs3200.svg)
+![Alt Text](./image/color_space.png)
 
-## Getting Started
+## Circuit
 
 Explain the necessary steps to get started with the project. Include any dependencies or tools required for development.
+
+![Alt Text](./image/tcs3200.svg)
 
 ## Project Structure
 
