@@ -19,7 +19,7 @@ This project serves as a template for future AVR MCU projects. It contains a pre
 
 Color difference is the seperation between two colors. Common definitions of color difference are distance within a color space. The starndard means of determining distance is Euclidean distance.
 
-![Alt Text](./images/tcs3200.svg)
+![Alt Text](./image/tcs3200.svg)
 
 ## Getting Started
 
