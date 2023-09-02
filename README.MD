@@ -1,7 +1,7 @@
 # Detect Color Difference with TCS3200
 
 Table of Contents
-- [Theory](#thoery)
+- [Theory](#theory)
 - [Circuit](#circuit)
 - [Project Structure](#project-structure)
 - [Configuration](#configuration)
