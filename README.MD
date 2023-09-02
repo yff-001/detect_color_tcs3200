@@ -22,7 +22,7 @@ The color sensor TCS3200 is used to sample color information. The output is a sq
 
 There are four types of photodiodes on the chip: red, green, blue, and clear. S2 and S3 pins are used to select which group of photodiodes are active.
 
-The MCU is an Atmega328P. Output from TCS3200 is connected to external interrupt pin (PB0) on MCU. The pin is configured to generate a interrupt request on rising edge of input signal.
+The MCU is an Atmega328P. Output from TCS3200 is connected to an external interrupt pin (PB0) on MCU. This pin is configured to generate a interrupt request on rising edge of input signal.
 
 ![Alt Text](./image/tcs3200.svg)
 
