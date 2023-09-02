@@ -28,7 +28,7 @@ The MCU is an Atmega328P. Output from TCS3200 is connected to external interrupt
 
 ## Operation
 
-Indide the INO ISR, the number of pulses is accumulated in a variable.
+Indide the INT0 ISR, the number of pulses is accumulated in a variable.
 
  <pre>
  ISR(INT0_vect) {
@@ -36,7 +36,7 @@ Indide the INO ISR, the number of pulses is accumulated in a variable.
  }
  </pre>
 
-Upon initialization, S2 and S3 pins are low, thus red photodiodes are active. The 16 bit timer 1 on MCU is configured to generate a interrupt request at every 3332 &mu;s. Inside this timer interrupt service routine, S2 and S3 pins are toggled to select a different group of photodioes. Before toggling, pulse counts accumulated inside INT0 ISR are read out and set to zero. With proper distance between sensor and light source and output level set, the value of varialbe pulse_count will fall within the range of {0, 255}. 
+Upon initialization, S2 and S3 pins are low, thus red photodiodes are active. The 16 bit timer 1 on MCU is configured to generate a interrupt request at every 3332 &mu;s. Inside this timer interrupt service routine, S2 and S3 pins are toggled to select a different group of photodioes. Before toggling, pulse counts accumulated inside INT0 ISR are read out and set to zero. With proper distance between sensor and light source and output level set, the value of variable pulse_count will fall within the range of {0, 255}. 
 
 A finite state machine controls the channel switching, 
 
@@ -46,7 +46,7 @@ ISR(TIMER1_COMPA_vect) {
 }
 </pre>
 
-Since variable pulse_cont is read out every 3332&mu;s, the sampling fequency is 300.12 Hz. And since red, green, blue channels are sampled in turn. The sampling frequency for all three channels is 100.04 Hz. This is fast enough to capture rapid transition is color change. For example, it is suitable for detecting the blinking sequence of a RGB led.
+Since variable pulse_count is read out every 3332&mu;s, the sampling fequency is 300.12 Hz. And since red, green, blue channels are sampled in turn, the sampling frequency for all three channels is 100.04 Hz. This is fast enough to capture rapid transition is color change. For example, it is suitable for detecting the blinking sequence of a RGB led.
 
 The integer values for three color channels are used to calculate the Euclidean distance in RGB color space.
 
