@@ -50,6 +50,10 @@ void init_system() {
     uart0_init();
     init_timer1();
 
+    /* init TCS3200 */
+    DDRB |= (1 << PB2) | (1 << PB3) | (1 << PB4) | (1 << PB5);
+    PORTB |= (1 << PB4) | (1 << PB5);                                       // set output frequency at 100%
+
     sei();
 }
 

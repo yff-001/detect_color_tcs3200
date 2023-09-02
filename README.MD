@@ -17,6 +17,8 @@ Table of Contents
 
 Color difference is the seperation between two colors. Common definitions of color difference are distance within a color space. The starndard means of determining distance is Euclidean distance.
 
+$e=mc^2$
+
 ![Alt Text](./image/color_space.png)
 
 ## Circuit
